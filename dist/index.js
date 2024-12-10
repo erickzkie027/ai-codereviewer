@@ -119,6 +119,7 @@ function createPrompt(changedFiles, prDetails) {
 - Provide comments and suggestions ONLY if there is something to improve, otherwise return an empty array.
 - Provide at most ${REVIEW_MAX_COMMENTS} comments. It's up to you how to decide which comments to include.
 - Write the comment in GitHub Markdown format.
+- Check if the Last Updated date is updated.
 - Use the given description only for the overall context and only comment the code.
 ${REVIEW_PROJECT_CONTEXT
         ? `- Additional context regarding this PR's project: ${REVIEW_PROJECT_CONTEXT}`
