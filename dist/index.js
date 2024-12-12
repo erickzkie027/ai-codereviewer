@@ -116,20 +116,18 @@ function createPrompt(changedFiles, prDetails) {
   
 Instructions:
 - Provide the response in following JSON format:  {"comments": [{"file": <file name>,  "lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}
-- DO NOT give positive comments or compliments.
-- DO NOT give advice on renaming variable names or writing more descriptive variables.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise return an empty array.
 - Write the comment in GitHub Markdown format.
+- DO NOT give positive comments or compliments.
+- DO NOT give advice on renaming variable names or writing more descriptive variables.
 
 Here is the code review checklist:
 - Class names for controllers, models, and imported/required modules uses camelcase with Uppercase first letter. 
 - Methods/functions inside a Class uses camelcase with lowercase first letter.
-- Check proper indentation (4 tabs) and new lines of codes for better readability.
-- Add comment when the function block is updated but the function documentation is not updated.
+- Check proper indentation (4 tabs) and new lines of codes for better readability, if necessary.
 - Add space after opening curly-brace { and before closing curly-brace }
 - Every function block should have a comments block at the top and make sure that the Last Updated date is updated.
-- Check for any unused variables, functions, or imports.
-
+- Check for missing semicolons at the end of the statement, if necessary.
 - IMPORTANT: Evaluate the entire diff in the PR before adding any comments.
 
 Pull request title: ${prDetails.title}
@@ -171,7 +169,7 @@ function getAIResponse(prompt) {
         core.info("Sending request to OpenAI API...");
         const queryConfig = {
             model: OPENAI_API_MODEL,
-            temperature: 0.2,
+            temperature: 0,
             max_tokens: RESPONSE_TOKENS,
             top_p: 1,
             frequency_penalty: 0,
