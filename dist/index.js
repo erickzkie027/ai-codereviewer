@@ -54,7 +54,7 @@ const OPENAI_API_MODEL = core.getInput("OPENAI_API_MODEL");
 const REVIEW_MAX_COMMENTS = core.getInput("REVIEW_MAX_COMMENTS");
 const REVIEW_PROJECT_CONTEXT = core.getInput("REVIEW_PROJECT_CONTEXT");
 const APPROVE_REVIEWS = core.getInput("APPROVE_REVIEWS") === "true";
-const RESPONSE_TOKENS = 1024;
+const RESPONSE_TOKENS = 5000;
 const octokit = new rest_1.Octokit({ auth: GITHUB_TOKEN });
 const openai = new openai_1.default({
     apiKey: OPENAI_API_KEY,
@@ -124,10 +124,11 @@ Instructions:
 Here is the code review checklist:
 - Class names for controllers, models, and imported/required modules uses camelcase with Uppercase first letter. 
 - Methods/functions inside a Class uses camelcase with lowercase first letter.
-- Check proper indentation (4 tabs) and new lines of codes for better readability, if necessary.
 - Add space after opening curly-brace { and before closing curly-brace }
-- Every function block should have a comments block at the top and make sure that the Last Updated date is updated.
+- Every function block should have a documentation block at the top and make sure that the details are correct and updated.
 - Check for missing semicolons at the end of the statement, if necessary.
+- Identify any spelling mistakes or typos and unreadable variables / functions in the code.
+- Check if the the Last Updated date in the documentation block, when they made changes from the function or class.
 - IMPORTANT: Evaluate the entire diff in the PR before adding any comments.
 
 Pull request title: ${prDetails.title}
