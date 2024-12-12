@@ -114,10 +114,17 @@ function createPrompt(changedFiles: File[], prDetails: PRDetails): string {
 - DO NOT give positive comments or compliments.
 - DO NOT give advice on renaming variable names or writing more descriptive variables.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise return an empty array.
-- Provide at most ${REVIEW_MAX_COMMENTS} comments. It's up to you how to decide which comments to include.
 - Write the comment in GitHub Markdown format.
-- Provide feedback if the Last Updated Date: is not updated in the documentation block.
 - Use the given description only for the overall context and only comment the code.
+
+Here is the code review checklist:
+- Always set your code editor to use 4 spaces for tabs.
+- Class names for controllers, models, and imported/required modules uses camelcase with Uppercase first letter. 
+- Methods/functions inside a Class uses camelcase with lowercase first letter.
+- Make sure new lines are added for each code block.
+- Add comment when the function block is updated but the function documentation is not updated.
+- Add space after opening curly-brace { and before closing curly-brace }
+
 ${
   REVIEW_PROJECT_CONTEXT
     ? `- Additional context regarding this PR's project: ${REVIEW_PROJECT_CONTEXT}`
@@ -146,6 +153,8 @@ TAKE A DEEP BREATH AND WORK ON THIS THIS PROBLEM STEP-BY-STEP.
   }
 
   core.info("Prompt created successfully.");
+  core.info(`${problemOutline}\n ${diffChunksPrompt.join("\n")}`);
+
   return `${problemOutline}\n ${diffChunksPrompt.join("\n")}`;
 }
 
