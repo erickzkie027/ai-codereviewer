@@ -112,31 +112,28 @@ function analyzeCode(changedFiles, prDetails) {
 }
 function createPrompt(changedFiles, prDetails) {
     core.info("Creating prompt for AI...");
-    const problemOutline = `Your task is to review pull requests (PR). Instructions:
+    const problemOutline = `Your task is to review pull requests (PR). 
+  
+Instructions:
 - Provide the response in following JSON format:  {"comments": [{"file": <file name>,  "lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}
 - DO NOT give positive comments or compliments.
 - DO NOT give advice on renaming variable names or writing more descriptive variables.
 - Provide comments and suggestions ONLY if there is something to improve, otherwise return an empty array.
 - Write the comment in GitHub Markdown format.
-- Use the given description only for the overall context and only comment the code.
 
 Here is the code review checklist:
-- Always set your code editor to use 4 spaces for tabs.
 - Class names for controllers, models, and imported/required modules uses camelcase with Uppercase first letter. 
 - Methods/functions inside a Class uses camelcase with lowercase first letter.
-- Make sure new lines are added for each code block.
+- Check proper indentation (4 tabs) and new lines of codes for better readability.
 - Add comment when the function block is updated but the function documentation is not updated.
 - Add space after opening curly-brace { and before closing curly-brace }
+- Every function block should have a comments block at the top and make sure that the Last Updated date is updated.
+- Check for any unused variables, functions, or imports.
 
-${REVIEW_PROJECT_CONTEXT
-        ? `- Additional context regarding this PR's project: ${REVIEW_PROJECT_CONTEXT}`
-        : ""}
-- IMPORTANT: NEVER suggest adding comments to the code.
 - IMPORTANT: Evaluate the entire diff in the PR before adding any comments.
 
 Pull request title: ${prDetails.title}
 Pull request description:
-
 ---
 ${prDetails.description}
 ---
